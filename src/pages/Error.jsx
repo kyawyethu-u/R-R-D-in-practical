@@ -1,14 +1,17 @@
-import {useNavigate} from 'react-router-dom'
+import {Link, useRouteError} from 'react-router-dom'
 
 const Error = () => {
-    const navigate =useNavigate();
-    const navigateHandler=()=>{
-        navigate("/")}
-
+    const error =useRouteError();
+    let title = "Unknown Error.";
+    if (error.status === 500){
+        title = error.data.message;
+    }
   return (
    <>
-   <h1>Page Not Found</h1>
-   <button onClick={navigateHandler}>Go back Home</button>
+   <h1>{title}</h1>
+   <Link to="/">
+   <button>Go back Home</button>
+   </Link>
    </>
   )
 }
